@@ -427,7 +427,8 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.dateparser', 'ui.bootst
   closeText: 'Done',
   closeOnDateSelection: true,
   appendToBody: false,
-  showButtonBar: true
+  showButtonBar: true,
+  lazyDom: false
 })
 
 .directive('datepickerPopup', ['$compile', '$parse', '$document', '$position', 'dateFilter', 'dateParser', 'datepickerPopupConfig',
@@ -476,6 +477,8 @@ function ($compile, $parse, $document, $position, dateFilter, dateParser, datepi
           datepickerEl.attr( cameltoDash(option), value );
         });
       }
+
+      scope.lazyDom= angular.isDefined(datepickerEl.attr("lazy-dom")) ? datepickerEl.attr("lazy-dom")==="true" : datepickerPopupConfig.lazyDom;
 
       scope.watchData = {};
       angular.forEach(['minDate', 'maxDate', 'datepickerMode'], function( key ) {
